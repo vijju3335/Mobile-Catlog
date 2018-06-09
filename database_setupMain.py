@@ -90,5 +90,5 @@ class Model(Base):
             
         }
 
-engine = create_engine('sqlite:///androidWorld.db')
+engine = create_engine('sqlite:///mobileWorld.db')
 Base.metadata.create_all(engine)
