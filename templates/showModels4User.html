@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Mobile World Catlog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+    <style>
+    .btn{
+      background-color: white;
+      border-color: white;
+      color:black;   
+  }
+  .new:hover{
+      background-color: #337AB7;
+      border-color: #337AB7;
+      color: white;
+      text-decoration: none;
+  }
+  .edit:hover{
+      background-color: #337AB7;
+      border-color: #337AB7;
+      color: white;
+      text-decoration: none;
+  }
+  .delete{
+      float: right;
+  }
+  .delete:hover{
+      background-color: #D9534F;
+      border-color: #D9534F;
+      color: white;
+      text-decoration: none;
+  }
+  .navbar-brand{
+      font-size: 30px;
+      padding-bottom: 0;
+  }
+  .alert,.new{
+      margin-top:20px;
+  }
+ .back{
+    font-size:30px;
+    color:black;    
+    margin: 20px;
+    margin-bottom: 5px;
+}
+.back:hover{
+    text-decoration: none;
+}
+.card{
+    padding: 15px 15px 0 15px;
+}
+.title-brand{
+    text-align: center;
+    color: black;  
+}
+.title-brand:hover{
+    color: #327ECC;
+    text-decoration: none;
+}
+</style>
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Mobile World</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                
+                {% if not cur_user['email'] %}
+                    <a href="/login" style="font-size:18px;color:white;text-decoration: None;"><i class="fa fa-sign-in" style="font-size:24px;color:white"> </i> Login</a>
+                {% endif %}
+                {% if cur_user['user_id'] %}
+                    <a href="/logout" style="font-size:18px;color:white;text-decoration: None;"><i class="fa fa-sign-out" style="font-size:24px;color:white"> </i> Logout</a>
+                {% endif %}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </header>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="alert alert-info">
+        {% for message in messages %}
+        <li><strong>{{message}}</strong></li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    <main>
+        
+        <a href="{{url_for('showBrands')}}" class="fa fa-mail-reply-all back"></a>
+    <!-- Page Content -->
+        <div class="container">
+        {% if cur_user['user_id']==brand.user_id %}
+        <div>
+            <a href="{{url_for("newModel",brand_id=brand.id)}}" class="btn btn-link new">Add New Model</a>
+        </div>
+        {% endif %}
+      <!-- Page Heading -->
+      <h1 class="my-4"></h1>
+
+      <div class="row">
+            {% for i in model %}
+            <div class="col-lg-4 col-md-4 col-sm-6 catlog-item">
+                <div class="card h-100">
+                    <a href="{{url_for("showSpecificationsOfModel",brand_id=brand.id , model_id=i.id )}}"><img class="card-img-top" src="{{i.picture}}" alt="{{brand.name}} {{i.name}}"></a>
+                    <div class="card-body">
+                       <a href="{{url_for("showSpecificationsOfModel",brand_id=brand.id , model_id=i.id )}}" class="title-brand"><h4>{{brand.name}} {{i.name}}</h4></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+    </main>
+  </body>
+
+</html>

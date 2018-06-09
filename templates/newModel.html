@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Mobile World Catlog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+    <style>
+    .btn{
+      background-color: white;
+      border-color: white;
+      color:black;   
+  }
+  
+  .navbar-brand{
+      font-size: 30px;
+  }
+
+ .card-new {
+  max-width: 25rem;
+}
+.card-header{
+	background-color:#ED7322;
+	color:white;
+}
+.outer{
+	margin-top:100px;
+}
+.back{
+    font-size:30px;
+    color:black;    
+    margin-left: 20px;
+    margin-top:40px;
+    
+}
+.back:hover{
+    text-decoration: none;
+}
+</style>
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="padding-bottom: 0px;">
+      <div class="container">
+        <p class="navbar-brand" href="#">Mobile World</p>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                {% if not cur_user['email'] %}
+                    <a href="/login" style="font-size:18px;color:white;text-decoration: None;"><i class="fa fa-sign-in" style="font-size:24px;color:white"> </i> Login</a>
+                {% endif %}
+                {% if cur_user['user_id'] %}
+                    <a href="/logout" style="font-size:18px;color:white;text-decoration: None;"><i class="fa fa-sign-out" style="font-size:24px;color:white"> </i> Logout</a>
+                {% endif %}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </header>
+    <main>
+    <a href="{{url_for('showModels',brand_id=brand.id)}}" class="fa fa-mail-reply-all back"></a>
+  <div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Add New Model to {{brand.name}}</div>
+      <div class="card-body">
+        <form action="{{url_for('newModel',brand_id=brand.id)}} " method='POST'>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="modalName">Model Name</label>
+                <input class="form-control" id="modalName" type="text"  name="name" required placeholder="Enter model name">
+              </div>
+              <div class="col-md-6">
+                <label for="os">Os </label>
+                <input class="form-control" id="os" type="text"  name="os" required placeholder="Enter Os">
+              </div>
+            </div>
+          </div>
+		  
+      <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="processor">Processor</label>
+                <input class="form-control" id="processor" type="text"  name="processor" required placeholder="Enter Processor">
+              </div>
+              <div class="col-md-6">
+                <label for="pic">Picture Url</label>
+                <input class="form-control" id="pic" type="text"  name="picture" required placeholder="Enter Picture Url from GSM Arena">
+              </div>
+            </div>
+          </div>
+		  		
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="ram">Ram</label>
+                <input class="form-control" id="ram" type="text"  name="ram" required placeholder="Enter Ram">
+              </div>
+              <div class="col-md-6">
+                <label for="storage">Storage</label>
+                <input class="form-control" id="storage" type="text"  name="storage" required placeholder="Enter Storage">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="cam">Camera</label>
+                <input class="form-control" id="cam" type="text"  name="camera" required placeholder="Enter Camera front/rear mps">
+              </div>
+              <div class="col-md-6">
+                <label for="battery">Battery</label>
+                <input class="form-control" id="battery" type="text" title="3000 mah,.." name="battery" required placeholder="Enter Battery mah">
+              </div>
+            </div>
+          </div>
+		  
+		  <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="conn">Connectivity</label>
+                <input class="form-control" id="conn" type="text" title="4G/3G/VOLTE..." name="conn" required placeholder="Enter Connectivity">
+              </div>
+              <div class="col-md-6">
+                <label for="sim">Sim Slot</label>
+                <input class="form-control" id="sim" type="text"  name="sim" required placeholder="Enter Sim slot Type">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="colors">Colors</label>
+                <input class="form-control" id="colors" type="text"  name="colors" required placeholder="Enter Avaliable Colors">
+              </div>
+              <div class="col-md-6">
+                <label for="sensors">Sensors</label>
+                <input class="form-control" id="sensors" type="text"  name="sensors" required placeholder="Enter Avaliable Sensors">
+              </div>
+            </div>
+          </div>
+		  
+		  <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="price">Price</label>
+                <input class="form-control" id="price" type="text"  title="Rs 10,999 ..." name="price" required placeholder="Enter Price">
+              </div>
+              <div class="col-md-6">
+                <label for="des">Description</label>
+                <input class="form-control" id="des" type="text"  name="des" required placeholder="Describe About Adding Model">
+              </div>
+            </div>
+          </div>
+          
+          <input type="submit" class="btn btn-success btn-block" value=Add>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
