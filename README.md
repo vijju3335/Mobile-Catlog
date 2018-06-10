@@ -105,7 +105,7 @@ process goes here.
   if any error occured, use this command ``` virtualenv --no-site-packages envName --always-copy ```
   
   #### Install Requirements
-  use below command to install all dependencies ``` run pip install -r requirements.txt ```
+  use below command to install all dependencies ``` pip install -r requirements.txt ```
   
 ## Documentation
 
