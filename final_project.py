@@ -40,6 +40,11 @@ def showLogin():
     ''' return "The current session state is %s" % login_session['state']'''
     return render_template('login.html', STATE=state)
 
+'''
+gconnect check client access token with project json file,
+and validate user Login
+'''
+
 
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
