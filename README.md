@@ -157,6 +157,8 @@ process goes here.
 ## Output
   see Output from images in [Output file](https://github.com/vijju3335/Mobile-Catlog/blob/master/Output)
   
+  - For better output use model pictures of size more than 700X700.
+  
 ## References
 
 - stack overflow to errors retriving.
