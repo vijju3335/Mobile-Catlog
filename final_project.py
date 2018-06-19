@@ -1,4 +1,4 @@
-from flask import Flask, render_template,
+from flask import Flask, render_template
 from flask import request, redirect, jsonify, url_for, flash
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
@@ -267,8 +267,7 @@ def editBrand(brand_id):
                 session.commit()
                 '''flash message'''
                 flash(
-                    before + " Brand
-                    successfully changed as " + editBr.name)
+                    before + " Brand successfully changed as " + editBr.name)
                 session.close()
                 return redirect('/')
             else:
